@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true"
+  xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+	    <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" 
+			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+
+	<!-- normal creation of log -->
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+	    <param name="append" value="false" />
+	    <param name="file" value="registerPage.log" />
+	    <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" 
+				value="%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] => %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+	
+	<!-- auto recreate log file daily -->
+	<appender name="roll-by-time"
+	    class="org.apache.log4j.rolling.RollingFileAppender">
+	    <param name="Encoding" value="UTF-8"/>
+	    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	        <param name="FileNamePattern" value="report_CDT_KQLCNT.%d{yyyy-MM-dd}.log" /> 
+	    </rollingPolicy>
+	    <layout class="org.apache.log4j.PatternLayout">
+	        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] => %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="roll-by-time" /> -->
+	</root>
+
+</log4j:configuration>
